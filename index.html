@@ -2,90 +2,54 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Events Example</title>
+    <title>Tournaments</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"></script>
     <style>
       body { background: #181730; color: #fff; font-family: sans-serif; margin: 0; }
       .container { max-width: 400px; margin: 0 auto; padding: 24px 0; }
-      .event-card {
-        background: #232347;
-        border-radius: 20px;
-        box-shadow: 0 2px 12px #0005;
-        margin-bottom: 28px;
-        overflow: hidden;
-      }
-      .event-image {
-        width: 100%;
-        height: 170px;
-        background: #292955;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .event-title {
-        font-weight: 600;
-        font-size: 1.1rem;
-        margin: 16px 20px 10px 20px;
-        background: #232347;
-        color: #fff;
-        border-radius: 6px;
-        min-height: 28px;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        /* текст не отображается, только пустой блок */
-      }
-      .event-info-row {
-        display: flex;
-        gap: 10px;
-        margin: 0 20px 18px 20px;
-      }
-      .event-info {
-        flex: 1;
-        background: #232347;
-        color: #fff;
-        border-radius: 8px;
-        min-height: 22px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1.5px dashed #47477b;
-        font-size: 0.95rem;
-        /* текст не отображается, только пустой блок */
-      }
+      .event-card { background: #232347; border-radius: 20px; box-shadow: 0 2px 12px #0005; margin-bottom: 28px; overflow: hidden; }
+      .event-title { font-weight: 600; font-size: 1.1rem; margin: 16px 20px 10px 20px; }
+      .event-desc { margin: 0 20px 10px 20px; color: #c2c6dc; font-size: 0.97rem; }
+      .event-row { display: flex; gap: 10px; margin: 0 20px 18px 20px; color: #fff; font-size: 0.93rem; }
+      .event-url { margin: 0 20px 15px 20px; color: #a3c1f7; font-size: 0.95rem; word-break: break-all; }
     </style>
   </head>
   <body>
-    <div class="container">
-      <!-- Event Card 1 -->
-      <div class="event-card">
-        <div class="event-image"></div>
-        <div class="event-title"></div>
-        <div class="event-info-row">
-          <div class="event-info"></div>
-          <div class="event-info"></div>
-          <div class="event-info"></div>
-        </div>
-      </div>
-      <!-- Event Card 2 -->
-      <div class="event-card">
-        <div class="event-image"></div>
-        <div class="event-title"></div>
-        <div class="event-info-row">
-          <div class="event-info"></div>
-          <div class="event-info"></div>
-          <div class="event-info"></div>
-        </div>
-      </div>
-      <!-- Event Card 3 -->
-      <div class="event-card">
-        <div class="event-image"></div>
-        <div class="event-title"></div>
-        <div class="event-info-row">
-          <div class="event-info"></div>
-          <div class="event-info"></div>
-          <div class="event-info"></div>
-        </div>
-      </div>
-    </div>
+    <div class="container" id="cards"></div>
+    <script type="module">
+      const supabaseUrl = 'https://jivmjxjzzvzcxxjyifym.supabase.co';
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppdm1qeGp6enZ6Y3h4anlpZnltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE2NTQ5ODQsImV4cCI6MjA2NzIzMDk4NH0.K795IfH0bGgrO7Mn8bL8YKk_cmQRE9Az_ZXoEPJzl3s';
+      const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+      async function loadTournaments() {
+        const { data, error } = await supabase
+          .from('tournaments')
+          .select('*')
+          .order('id', { ascending: false });
+
+        const cards = document.getElementById('cards');
+        cards.innerHTML = '';
+        if (error) {
+          cards.innerHTML = '<div style="color:#ff7272;">Ошибка загрузки данных</div>';
+        } else if (!data || data.length === 0) {
+          cards.innerHTML = '<div style="color:#aaa;text-align:center;">Нет турниров</div>';
+        } else {
+          data.forEach(t => {
+            cards.innerHTML += `
+              <div class="event-card">
+                <div class="event-title">${t.title}</div>
+                <div class="event-desc">${t.description || ''}</div>
+                <div class="event-row">
+                  <div>Дата: ${t.date || ''}</div>
+                  <div>Сумма: ${t.amount || ''}</div>
+                </div>
+                <div class="event-url"><a href="${t.url}" style="color:#a3c1f7" target="_blank">Ссылка</a></div>
+              </div>
+            `;
+          });
+        }
+      }
+      loadTournaments();
+    </script>
   </body>
 </html>
