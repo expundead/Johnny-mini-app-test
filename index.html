@@ -3,69 +3,24 @@
   <head>
     <meta charset="UTF-8">
     <title>Tournaments</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <style>
       body { background: #181730; color: #fff; font-family: sans-serif; margin: 0; }
       .container { max-width: 400px; margin: 0 auto; padding: 24px 0; }
-      .event-card {
-        background: #232347;
-        border-radius: 20px;
-        box-shadow: 0 2px 12px #0005;
-        margin-bottom: 28px;
-        overflow: hidden;
-      }
-      .event-image {
-        width: 100%;
-        height: 170px;
-        background: #292955;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .event-title {
-        font-weight: 600;
-        font-size: 1.1rem;
-        margin: 16px 20px 10px 20px;
-        color: #fff;
-        border-radius: 6px;
-        min-height: 28px;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-      }
-      .event-info-row {
-        display: flex;
-        gap: 10px;
-        margin: 0 20px 18px 20px;
-      }
-      .event-info {
-        flex: 1;
-        background: #232347;
-        color: #fff;
-        border-radius: 8px;
-        min-height: 22px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1.5px dashed #47477b;
-        font-size: 0.95rem;
-        padding: 0 3px;
-        word-break: break-all;
-      }
-      .event-link {
-        margin: 0 20px 15px 20px;
-        color: #a3c1f7;
-        font-size: 0.95rem;
-        word-break: break-all;
-      }
+      .event-card { background: #232347; border-radius: 20px; box-shadow: 0 2px 12px #0005; margin-bottom: 28px; overflow: hidden; }
+      .event-image { width: 100%; height: 170px; background: #292955; display: flex; align-items: center; justify-content: center; }
+      .event-title { font-weight: 600; font-size: 1.1rem; margin: 16px 20px 10px 20px; color: #fff; border-radius: 6px; min-height: 28px; display: flex; align-items: center; justify-content: flex-start; }
+      .event-info-row { display: flex; gap: 10px; margin: 0 20px 18px 20px; }
+      .event-info { flex: 1; background: #232347; color: #fff; border-radius: 8px; min-height: 22px; display: flex; align-items: center; justify-content: center; border: 1.5px dashed #47477b; font-size: 0.95rem; padding: 0 3px; word-break: break-all; }
+      .event-link { margin: 0 20px 15px 20px; color: #a3c1f7; font-size: 0.95rem; word-break: break-all; }
     </style>
   </head>
   <body>
     <div class="container" id="cards"></div>
-    <script type="module">
+    <script>
       const supabaseUrl = 'https://jivmjxjzzvzcxxjyifym.supabase.co';
       const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppdm1qeGp6enZ6Y3h4anlpZnltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE2NTQ5ODQsImV4cCI6MjA2NzIzMDk4NH0.K795IfH0bGgrO7Mn8bL8YKk_cmQRE9Az_ZXoEPJzl3s';
-      const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+      const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
       async function loadTournaments() {
         const { data, error } = await supabase
@@ -73,7 +28,6 @@
           .select('*')
           .order('id', { ascending: false });
 
-        // Для отладки:
         console.log('data:', data);
         console.log('error:', error);
 
