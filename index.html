@@ -20,15 +20,14 @@
     <script>
       const supabaseUrl = 'https://jivmjxjzzvzcxxjyifym.supabase.co';
       const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppdm1qeGp6enZ6Y3h4anlpZnltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE2NTQ5ODQsImV4cCI6MjA2NzIzMDk4NH0.K795IfH0bGgrO7Mn8bL8YKk_cmQRE9Az_ZXoEPJzl3s';
-      const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+      const client = supabase.createClient(supabaseUrl, supabaseKey);
 
       async function loadTournaments() {
-        const { data, error } = await supabase
+        const { data, error } = await client
           .from('tournaments')
           .select('*')
           .order('id', { ascending: false });
 
-        // Для отладки
         console.log('data:', data);
         console.log('error:', error);
 
