@@ -73,6 +73,10 @@
           .select('*')
           .order('id', { ascending: false });
 
+        // Для отладки:
+        console.log('data:', data);
+        console.log('error:', error);
+
         const cards = document.getElementById('cards');
         cards.innerHTML = '';
         if (error) {
