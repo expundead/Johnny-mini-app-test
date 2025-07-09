@@ -6,32 +6,43 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 <style>
 html,body{height:100%;margin:0;padding:0;}
-body{background:#171820;color:#fff;font-family:'Manrope',sans-serif;margin:0;padding:0;min-height:100vh;display:flex;justify-content:center;}
+body{background:#171820;color:#fff;font-family:'Manrope',sans-serif;display:flex;justify-content:center;padding-bottom:74px;}
 .app-wrap{width:100vw;max-width:430px;min-height:100vh;display:flex;flex-direction:column;position:relative;background:#23232e;border-radius:20px 20px 0 0;box-shadow:0 8px 32px #0008;overflow:hidden;}
 .links-tile-list{display:flex;flex-direction:column;gap:12px;padding:26px 14px 20px;}
-.links-tile{display:flex;align-items:stretch;min-height:74px;width:100%;background:transparent;gap:0;cursor:pointer;text-decoration:none}
+.links-tile{display:flex;align-items:stretch;min-height:74px;width:100%;gap:0;cursor:pointer;text-decoration:none;overflow:hidden}
 .links-tile-panel{flex:1;display:flex;align-items:center;justify-content:center;padding:0 18px;background:radial-gradient(95% 245% at 77% -98%,#394A5B 39%,#253546 100%);border-radius:15px 0 0 15px;box-shadow:0 2px 12px #16181f3a;font-family:'Roboto',sans-serif;font-weight:500;font-size:1.11rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.links-tile-img{width:92px;min-width:92px;height:74px;background-size:cover;background-position:center;border-radius:0 15px 15px 0;flex-shrink:0;box-shadow:0 2px 12px #16181f28}
+.links-tile-img{width:92px;min-width:92px;height:100%;background-size:cover;background-position:center;border-radius:0 15px 15px 0;flex-shrink:0;overflow:hidden}
 .links-tile.reverse .links-tile-panel{border-radius:0 15px 15px 0}
-.links-tile.reverse .links-tile-img{border-radius:15px 0 0 15px}
+.links-tile.reverse .links-tile-img{border-radius:15px 0 0 15px;height:100%}
 .section-title-row{display:flex;align-items:center;margin:18px 15px 10px}
 .section-title{font-size:1rem;font-weight:600}
 .tournaments-list{padding:0 7px 18px;display:flex;flex-direction:column;gap:14px}
-.tournament-card{display:flex;align-items:center;justify-content:space-between;background:rgba(41,48,64,.96);border:1.5px solid #2f4265;border-radius:13px;box-shadow:0 2px 8px rgba(15,22,34,.13);padding:13px 17px 11px;cursor:pointer;transition:border-color .13s,box-shadow .13s}
-.tournament-card:hover{border-color:#6daefb;box-shadow:0 4px 12px rgba(50,70,125,.14)}
+.tournament-card{
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(92deg, #2F3A52 0%, #202C3C 100%);
+  border:1.5px solid #375278;
+  border-radius:13px;
+  box-shadow:0 2px 8px rgba(15,22,34,.13);
+  padding:13px 17px 11px;
+  cursor:pointer;
+  transition:transform .2s, box-shadow .2s, border-color .2s;
+}
+.tournament-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(109,174,251,0.15);
+  border-color:#6daefb;
+}
 .t-card-info{display:flex;flex-direction:column;gap:3px}
 .t-card-title{font-size:1.08rem;font-weight:600;color:#e7eeff}
 .t-card-date{font-size:.97rem;color:#6daefb;font-weight:500}
-/* ==== Кастомная стрелка ==== */
 .t-card-arrow{width:24px;height:24px;margin-left:17px;background:url('https://i.imgur.com/0RdERF1.png') center/contain no-repeat;opacity:.85;transition:transform .2s;flex-shrink:0}
 .tournament-card:hover .t-card-arrow{transform:translateX(3px);}
-
 .menu-panel{box-sizing:border-box;display:flex;flex-direction:row;justify-content:space-between;align-items:flex-start;padding:10px 0;gap:10px;position:fixed;left:50%;transform:translateX(-50%);bottom:0;height:74px;width:100vw;max-width:430px;background:radial-gradient(189.88% 168.92% at 49.8% 0%,#303E55 0%,#192232 100%),radial-gradient(136.79% 235.63% at 48.1% -40%,#5B5D80 11.37%,#353C5F 100%);box-shadow:0 -4px 64px rgba(11,14,17,.5);z-index:40;border-radius:0 0 20px 20px;}
-.item{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:0;gap:4px;margin:0 auto;width:88px;height:46px;cursor:pointer;}
+.item{display:flex;flex-direction:column;justify-content:center;align-items:center;width:88px;height:46px;cursor:pointer;}
 .icon{display:flex;justify-content:center;align-items:center;width:32px;height:32px;}
-.liga{width:32px;height:10px;font-family:'Roboto',sans-serif;font-weight:500;font-size:14px;line-height:22px;display:flex;align-items:center;color:#fff;}
-.tournaments{width:58px;height:10px;font-family:'Roboto',sans-serif;font-weight:500;font-size:14px;line-height:22px;display:flex;align-items:center;color:#6B8AB0;}
-.rating{width:54px;height:10px;font-family:'Roboto',sans-serif;font-weight:500;font-size:14px;line-height:22px;display:flex;align-items:center;color:#6B8AB0;}
+.liga,.tournaments,.rating{font-family:'Roboto',sans-serif;font-weight:500;font-size:14px;line-height:22px;display:flex;align-items:center}
+.liga{color:#fff}
+.tournaments,.rating{color:#6B8AB0}
 @media (max-width:430px){
   .app-wrap,.menu-panel{max-width:100vw;border-radius:0;}
   .links-tile-list{padding:15px 3px 12px;}
@@ -39,27 +50,15 @@ body{background:#171820;color:#fff;font-family:'Manrope',sans-serif;margin:0;pad
   .tournaments-list{padding-bottom:12px;}
   .t-card-arrow{width:18px;height:18px;}
 }
-body{padding-bottom:74px;}
 </style>
 </head>
 <body>
 <div class="app-wrap">
-  <!-- ===== Ссылки ===== -->
   <div class="links-tile-list">
-    <a class="links-tile" href="#" target="_blank">
-      <div class="links-tile-panel">Презентация Лиги</div>
-      <div class="links-tile-img" style="background-image:url('https://imgur.com/SYxmlz7.png')"></div>
-    </a>
-    <a class="links-tile reverse" href="#" target="_blank">
-      <div class="links-tile-img" style="background-image:url('https://imgur.com/U2nIB0H.png')"></div>
-      <div class="links-tile-panel">VODKA TEAM</div>
-    </a>
-    <a class="links-tile" href="#" target="_blank">
-      <div class="links-tile-panel">Джонни</div>
-      <div class="links-tile-img" style="background-image:url('https://imgur.com/UTsV1vz.png')"></div>
-    </a>
+    <a class="links-tile" href="#"><div class="links-tile-panel">Презентация Лиги</div><div class="links-tile-img" style="background-image:url('https://imgur.com/SYxmlz7.png')"></div></a>
+    <a class="links-tile reverse" href="#"><div class="links-tile-img" style="background-image:url('https://imgur.com/U2nIB0H.png')"></div><div class="links-tile-panel">VODKA TEAM</div></a>
+    <a class="links-tile" href="#"><div class="links-tile-panel">Джонни</div><div class="links-tile-img" style="background-image:url('https://imgur.com/UTsV1vz.png')"></div></a>
   </div>
-  <!-- ===== Турниры ===== -->
   <div class="section-title-row"><div class="section-title">БЛИЖАЙШИЕ ТУРНИРЫ</div></div>
   <div class="tournaments-list">
     <div class="tournament-card"><div class="t-card-info"><div class="t-card-title">Отборы среди казуалов #1</div><div class="t-card-date">12.07.2025</div></div><div class="t-card-arrow"></div></div>
@@ -68,32 +67,11 @@ body{padding-bottom:74px;}
     <div class="tournament-card"><div class="t-card-info"><div class="t-card-title">Отборы среди Профи #2</div><div class="t-card-date">20.07.2025</div></div><div class="t-card-arrow"></div></div>
   </div>
 </div>
-<!-- ===== Меню ===== -->
 <div class="menu-panel">
-  <div class="item">
-    <div class="icon">
-      <img src="https://i.imgur.com/Cm4N9WF.png" alt="Лига" style="width:27px;height:26px;">
-    </div>
-    <div class="liga">Лига</div>
-  </div>
-  <div class="item">
-    <div class="icon">
-      <img src="https://i.imgur.com/7jO1vfg.png" alt="Турниры" style="width:18px;height:20px;">
-    </div>
-    <div class="tournaments">Турниры</div>
-  </div>
-  <div class="item">
-    <div class="icon">
-      <img src="https://i.imgur.com/ed6C9e4.png" alt="Рейтинг" style="width:22.47px;height:18.47px;">
-    </div>
-    <div class="rating">Рейтинг</div>
-  </div>
-  <div class="item">
-    <div class="icon">
-      <img src="https://i.imgur.com/vIa66CY.png" alt="Рейтинг" style="width:19.5px;height:21.66px;">
-    </div>
-    <div class="rating">Рейтинг</div>
-  </div>
+  <div class="item"><div class="icon"><img src="https://i.imgur.com/Cm4N9WF.png" alt="Лига" style="width:27px;height:26px;"></div><div class="liga">Лига</div></div>
+  <div class="item"><div class="icon"><img src="https://i.imgur.com/7jO1vfg.png" alt="Турниры" style="width:18px;height:20px;"></div><div class="tournaments">Турниры</div></div>
+  <div class="item"><div class="icon"><img src="https://i.imgur.com/ed6C9e4.png" alt="Рейтинг" style="width:22.47px;height:18.47px;"></div><div class="rating">Рейтинг</div></div>
+  <div class="item"><div class="icon"><img src="https://i.imgur.com/vIa66CY.png" alt="Рейтинг" style="width:19.5px;height:21.66px;"></div><div class="rating">Рейтинг</div></div>
 </div>
 </body>
 </html>
