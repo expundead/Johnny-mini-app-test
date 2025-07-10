@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+<style>
+html,body{height:100%;margin:0;padding:0;}
+body{background:#171820;color:#fff;font-family:'Manrope',sans-serif;display:flex;justify-content:center;padding-bottom:74px;}
+.app-wrap{width:100vw;max-width:430px;min-height:100vh;display:flex;flex-direction:column;position:relative;background:#23232e;border-radius:20px 20px 0 0;box-shadow:0 8px 32px #0008;overflow:hidden;}
+.tournaments-list{padding:20px 14px 90px;display:flex;flex-direction:column;gap:22px}
+.tournament-card{display:flex;flex-direction:column;overflow:hidden;border-radius:15px;background:linear-gradient(92deg,#2F3A52 0%,#202C3C 100%);border:1.5px solid #375278;box-shadow:0 2px 8px rgba(15,22,34,.13);cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;}
+.tournament-card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(109,174,251,0.15);border-color:#6daefb}
+.t-card-img{width:100%;height:140px;background-size:cover;background-position:center;border-radius:15px 15px 0 0}
+.t-card-title{display:flex;justify-content:space-between;align-items:center;padding:12px 16px 6px;font-size:1.08rem;font-weight:600;color:#e7eeff;position:relative}
+.t-card-arrow{width:20px;height:20px;background:url('https://i.imgur.com/0RdERF1.png') center/contain no-repeat;opacity:.8;transition:transform .2s;flex-shrink:0}
+.tournament-card:hover .t-card-arrow{transform:translateX(3px);}
+.t-card-footer{display:flex;justify-content:space-between;padding:10px 16px 14px;border-top:1px solid rgba(255,255,255,0.06);font-size:0.95rem;color:#bdd6ff;text-align:center}
+.t-card-footer div{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px}
+.t-card-footer span{font-size:0.82rem;color:#5e86aa}
+.menu-panel{box-sizing:border-box;display:flex;flex-direction:row;justify-content:space-between;align-items:flex-start;padding:10px 0;gap:10px;position:fixed;left:50%;transform:translateX(-50%);bottom:0;height:74px;width:100vw;max-width:430px;background:radial-gradient(189.88% 168.92% at 49.8% 0%,#303E55 0%,#192232 100%),radial-gradient(136.79% 235.63% at 48.1% -40%,#5B5D80 11.37%,#353C5F 100%);box-shadow:0 -4px 64px rgba(11,14,17,.5);z-index:40;border-radius:0 0 20px 20px;}
+.item{display:flex;flex-direction:column;justify-content:center;align-items:center;width:88px;height:46px;cursor:pointer;}
+.icon{display:flex;justify-content:center;align-items:center;width:32px;height:32px;}
+.liga,.tournaments,.rating{font-family:'Roboto',sans-serif;font-weight:500;font-size:14px;line-height:22px;display:flex;align-items:center}
+.liga,.rating{color:#6B8AB0}
+.tournaments{color:#fff}
+</style>
+</head>
+<body>
+<div class="app-wrap">
+  <div class="tournaments-list">
+    <div class="tournament-card">
+      <div class="t-card-img" style="background-image:url('https://w.wallhaven.cc/full/rr/wallhaven-rrowdj.jpg')"></div>
+      <div class="t-card-title">Отборы среди казуалов #1 <div class="t-card-arrow"></div></div>
+      <div class="t-card-footer">
+        <div><div>200$</div><span>Призовой</span></div>
+        <div><div>12.07.2025</div><span>Дата</span></div>
+        <div><div>16:00</div><span>Время</span></div>
+      </div>
+    </div>
+    <div class="tournament-card">
+      <div class="t-card-img" style="background-image:url('https://w.wallhaven.cc/full/rr/wallhaven-rrowdj.jpg')"></div>
+      <div class="t-card-title">Отборы среди Профи #1 <div class="t-card-arrow"></div></div>
+      <div class="t-card-footer">
+        <div><div>600$</div><span>Призовой</span></div>
+        <div><div>13.07.2025</div><span>Дата</span></div>
+        <div><div>18:00</div><span>Время</span></div>
+      </div>
+    </div>
+    <div class="tournament-card">
+      <div class="t-card-img" style="background-image:url('https://w.wallhaven.cc/full/rr/wallhaven-rrowdj.jpg')"></div>
+      <div class="t-card-title">Отборы среди казуалов #2 <div class="t-card-arrow"></div></div>
+      <div class="t-card-footer">
+        <div><div>300$</div><span>Призовой</span></div>
+        <div><div>19.07.2025</div><span>Дата</span></div>
+        <div><div>17:00</div><span>Время</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- === МЕНЮ НАВИГАЦИИ === -->
+  <div class="menu-panel">
+    
+    <a class="item" href="index.html" style="text-decoration:none;">
+      <div class="icon"><img src="https://imgur.com/E37n5Dt.png" alt="Лига" style="width:27px;height:26px;"></div>
+      <div class="liga">Лига</div>
+    </a>
+    
+    <a class="item" href="tournies.html" style="text-decoration:none;">
+      <div class="icon"><img src="https://imgur.com/AJR2PoN.png" alt="Турниры" style="width:18px;height:20px;"></div>
+      <div class="tournaments">Турниры</div>
+    </a>
+    
+    <a class="item" href="leaderboard_1.html" style="text-decoration:none;">
+      <div class="icon"><img src="https://imgur.com/ed6C9e4.png" alt="Рейтинг" style="width:22.47px;height:18.47px;"></div>
+      <div class="rating">Рейтинг 1</div>
+    </a>
+    
+    <a class="item" href="leaderboard_2.html" style="text-decoration:none;">
+      <div class="icon"><img src="https://i.imgur.com/vIa66CY.png" alt="Рейтинг" style="width:19.5px;height:21.66px;"></div>
+      <div class="rating">Рейтинг 2</div>
+    </a>
+    
+  </div>
+</body>
+</html>

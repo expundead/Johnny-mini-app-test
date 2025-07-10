@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Рейтинг</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+<style>
+body { margin:0; padding:0; background:linear-gradient(180deg,#2d3551 0%,#1b2231 100%); color:#fff; font-family:'Manrope',sans-serif;}
+.app-wrap{width:100vw;max-width:430px;min-height:100vh;display:flex;flex-direction:column;position:relative;margin:auto;background:#23232e;border-radius:20px 20px 0 0;box-shadow:0 8px 32px #0008;overflow:hidden;}
+.header {text-align:center;padding:24px 0 10px;font-size:1.45rem;font-weight:700;letter-spacing:1px;}
+.leaderboard {
+  padding: 0 14px 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.leader-row {
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  background: linear-gradient(92deg,#2F3A52 0%,#202C3C 100%);
+  border: 1.5px solid #375278;
+  box-shadow: 0 2px 8px rgba(15,22,34,.13);
+  padding: 13px 17px 11px;
+  gap: 13px;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.leader-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(109,174,251,0.15);
+  border-color: #6daefb;
+}
+.leader-num {
+  width: 28px;
+  text-align: right;
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: #e7eeff;
+  opacity: .7;
+}
+.leader-avatar-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #26344a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #314169;
+  box-sizing: border-box;
+}
+.leader-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+.leader-nick {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 6px;
+}
+.menu-panel{box-sizing:border-box;display:flex;flex-direction:row;justify-content:space-between;align-items:flex-start;padding:10px 0;gap:10px;position:fixed;left:50%;transform:translateX(-50%);bottom:0;height:74px;width:100vw;max-width:430px;background:radial-gradient(189.88% 168.92% at 49.8% 0%,#303E55 0%,#192232 100%),radial-gradient(136.79% 235.63% at 48.1% -40%,#5B5D80 11.37%,#353C5F 100%);box-shadow:0 -4px 64px rgba(11,14,17,.5);z-index:40;border-radius:0 0 20px 20px;}
+.item{display:flex;flex-direction:column;justify-content:center;align-items:center;width:88px;height:46px;cursor:pointer;}
+.icon{display:flex;justify-content:center;align-items:center;width:32px;height:32px;}
+.liga,.tournaments,.rating{font-family:'Roboto',sans-serif;font-weight:500;font-size:14px;line-height:22px;display:flex;align-items:center}
+.liga,.tournaments{color:#6B8AB0}
+.rating{color:#fff;}
+.rating.white {
+  color: #fff; /* White color for Рейтинг 1 */
+}
+
+.rating.default {
+  color: #6B8AB0; /* Color for Рейтинг 2 like Турниры and Лига */
+}
+</style>
+</head>
+<body>
+<div class="app-wrap">
+  <div class="header">ТАБЛИЦА ЛИДЕРОВ</div>
+  <!-- === ТОП-3 ЛИДЕРА === -->
+  <style>
+    .top3{display:flex;justify-content:center;gap:28px;margin:14px 0 18px 0;}
+    .top3-item{display:flex;flex-direction:column;align-items:center;position:relative;}
+    .top3-avatar-wrap{position:relative;width:78px;height:78px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:3px solid #23242d;box-sizing:border-box;background:#23242d;}
+    .top3-avatar-wrap.gold{border-color:#ffe08a;box-shadow:0 0 0 3px #2d3551;}
+    .top3-avatar-wrap.silver{border-color:#b4c6e7;box-shadow:0 0 0 3px #2d3551;}
+    .top3-avatar-wrap.bronze{border-color:#e0b089;box-shadow:0 0 0 3px #2d3551;}
+    .top3-img{width:68px;height:68px;border-radius:50%;border:2px solid #fff;object-fit:cover;z-index:1;}
+    .top3-num{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);width:29px;height:29px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.04rem;border:2px solid #fff;font-family:'Roboto',sans-serif;box-shadow:0 2px 10px #0004;z-index:2;}
+    .top3-num.gold{background:linear-gradient(135deg,#ffe08a 80%,#ffb800 100%);color:#a76b01;}
+    .top3-num.silver{background:linear-gradient(135deg,#b4c6e7 70%,#a0b1c9 100%);color:#324260;}
+    .top3-num.bronze{background:linear-gradient(135deg,#e0b089 80%,#c79054 100%);color:#6b4d25;}
+    .top3-crown{position:absolute;top:-22px;left:50%;transform:translateX(-50%);width:26px;height:20px;z-index:3;}
+    .top3-nick{margin-top:15px;font-size:.97rem;font-family:'Roboto',sans-serif;font-weight:700;color:#fff;text-align:center;text-shadow:0 2px 4px #151d2a77;letter-spacing:.01em;}
+  </style>
+  <div class="top3">
+    <div class="top3-item">
+      <div class="top3-avatar-wrap silver">
+        <img class="top3-img" src="https://i.imgur.com/hjN3CPc.png" alt="">
+        <span class="top3-num silver">2</span>
+      </div>
+      <div class="top3-nick">Greedbert</div>
+    </div>
+    <div class="top3-item" style="z-index:2;">
+      <div class="top3-avatar-wrap gold">
+        <img class="top3-img" src="https://i.imgur.com/Yx9RJ3J.png" alt="">
+        <span class="top3-num gold">1</span>
+        <img class="top3-crown" src="https://imgur.com/f7J418u.png" alt="Корона">
+      </div>
+      <div class="top3-nick">Y_A_M_S_A</div>
+    </div>
+    <div class="top3-item">
+      <div class="top3-avatar-wrap bronze">
+        <img class="top3-img" src="https://i.imgur.com/4RtHn4u.png" alt="">
+        <span class="top3-num bronze">3</span>
+      </div>
+      <div class="top3-nick">Pinhida</div>
+    </div>
+  </div>
+  <!-- ========== END TOP-3 ========== -->
+  <div class="leaderboard">
+    <div class="leader-row">
+      <div class="leader-num">4</div>
+      <div class="leader-avatar-wrap">
+        <img class="leader-img" src="https://i.imgur.com/wlJ3Dw7.png">
+      </div>
+      <div class="leader-nick">Lilirex</div>
+    </div>
+    <div class="leader-row">
+      <div class="leader-num">5</div>
+      <div class="leader-avatar-wrap">
+        <img class="leader-img" src="https://i.imgur.com/CacQ6Uz.png">
+      </div>
+      <div class="leader-nick">Smiling</div>
+    </div>
+    <div class="leader-row">
+      <div class="leader-num">6</div>
+      <div class="leader-avatar-wrap">
+        <img class="leader-img" src="https://i.imgur.com/1qwR2dK.png">
+      </div>
+      <div class="leader-nick">SalimSalim</div>
+    </div>
+    <div class="leader-row">
+      <div class="leader-num">7</div>
+      <div class="leader-avatar-wrap">
+        <img class="leader-img" src="https://i.imgur.com/N1EVZvw.png">
+      </div>
+      <div class="leader-nick">Glinomes</div>
+    </div>
+    <div class="leader-row">
+      <div class="leader-num">8</div>
+      <div class="leader-avatar-wrap">
+        <img class="leader-img" src="https://i.imgur.com/8Wqv5pF.png">
+      </div>
+      <div class="leader-nick">Priks</div>
+    </div>
+    <div class="leader-row">
+      <div class="leader-num">9</div>
+      <div class="leader-avatar-wrap">
+        <img class="leader-img" src="https://i.imgur.com/afh8Re5.png">
+      </div>
+      <div class="leader-nick">ZooPreme</div>
+    </div>
+  </div>
+</div>
+<!-- === МЕНЮ НАВИГАЦИИ === -->
+  <div class="menu-panel">
+
+    <a class="item" href="index.html" style="text-decoration:none;">
+      <div class="icon"><img src="https://imgur.com/E37n5Dt.png" alt="Лига" style="width:27px;height:26px;"></div>
+      <div class="liga">Лига</div>
+    </a>
+
+    <a class="item" href="tournies.html" style="text-decoration:none;">
+      <div class="icon"><img src="https://i.imgur.com/7jO1vfg.png" alt="Турниры" style="width:18px;height:20px;"></div>
+      <div class="tournaments">Турниры</div>
+    </a>
+
+    <a class="item" href="leaderboard_1.html" style="text-decoration:none;">
+      <div class="icon"><img src="https://imgur.com/HqHRTVd.png" alt="Рейтинг" style="width:22.47px;height:18.47px;"></div>
+      <div class="rating white">Рейтинг 1</div> <!-- Added 'white' class here -->
+    </a>
+
+    <a class="item" href="leaderboard_2.html" style="text-decoration:none;">
+      <div class="icon"><img src="https://i.imgur.com/vIa66CY.png" alt="Рейтинг" style="width:19.5px;height:21.66px;"></div>
+      <div class="rating default">Рейтинг 2</div> <!-- Added 'default' class here -->
+    </a>
+
+  </div>
+</body>
+</html>
